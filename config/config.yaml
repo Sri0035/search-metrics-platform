@@ -1,0 +1,25 @@
+kafka:
+  bootstrap_servers: "${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}"
+  raw_topic: raw-search-events
+  metrics_topic: processed-metrics
+  anomalies_topic: anomaly-alerts
+
+postgres:
+  url: "${DATABASE_URL:postgresql://searchmetrics:searchmetrics@postgres:5432/search_metrics}"
+
+spark:
+  master: "${SPARK_MASTER:local[*]}"
+  checkpoint_dir: /tmp/spark-checkpoints
+
+simulator:
+  events_per_minute: 1000
+  service_ids:
+    - search-api
+    - recommendations
+    - indexer
+    - ranking
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  metrics_window_minutes: 60
